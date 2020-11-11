@@ -1,8 +1,9 @@
 package main
 
 import (
-	"log"
 	"net"
+
+	stdlog "log"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/health"
@@ -17,7 +18,7 @@ func main() {
 
 	listener, err := net.Listen("tcp", "0.0.0.0:9000")
 	if err != nil {
-		log.Fatalf("Failed: %v", err)
+		stdlog.Fatalf("Failed: %v", err)
 	}
 
 	s := grpc.NewServer()
@@ -30,7 +31,7 @@ func main() {
 	gen.RegisterChatServiceServer(s, chatservice)
 
 	if err := s.Serve(listener); err != nil {
-		log.Fatalf("Failed: %v", err)
+		stdlog.Fatalf("Failed: %v", err)
 	}
 
 }

@@ -24,13 +24,23 @@ export PATH=$PATH:$PWD/local/bin:$GOPATH/bin
 
 ## go mod
 ```
+go install \
+    github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway \
+    github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2 \
+    google.golang.org/protobuf/cmd/protoc-gen-go \
+    google.golang.org/grpc/cmd/protoc-gen-go-grpc
+
 go mod init github.com/juandemanjon/go_service
 go get -u github.com/golang/protobuf/protoc-gen-go
 go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
+go get -u github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway
 ```
 
 ## proto generation
 ```
 protoc --go_out=paths=source_relative:./gen -I proto chat.proto
-protoc --go_out=plugins=grpc:./gen --go_opt=paths=source_relative -I chat_service.proto
+protoc --go_out=plugins=grpc:./gen --go_opt=paths=source_relative -I proto chat_service.proto
+
+protoc -I proto --grpc-gateway_out ./gen --grpc-gateway_opt logtostderr=true --grpc-gateway_opt paths=source_relative -I $GOPATH/pkg/mod/github.com/grpc-ecosystem/grpc-gateway@v1.16.0/third_party/googleapis chat_service.proto
+
 ```

@@ -2,8 +2,12 @@ syntax = "proto3";
 package chat;
 option go_package="github.com/juandemanjon/go_service/gen;gen";
 
+import "google/api/annotations.proto";
+
 import "chat.proto";
 
 service ChatService {
-  rpc SayHello(Message) returns (Message) {}
+  rpc SayHello(Message) returns (Message) {
+    option (google.api.http) = { get:"/v1/hello/{body}" };
+  }
 }
