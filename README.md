@@ -24,13 +24,13 @@ export PATH=$PATH:$PWD/local/bin:$GOPATH/bin
 
 ## go mod
 ```
-go mod init github/juandemanjon/go_service
+go mod init github.com/juandemanjon/go_service
 go get -u github.com/golang/protobuf/protoc-gen-go
 go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
 ```
 
-## protoc
+## proto generation
 ```
-protoc --go_out=paths=source_relative:./gen -I. chat.proto
-protoc --go_out=plugins=grpc:./gen --go_opt=paths=source_relative chat.proto
+protoc --go_out=paths=source_relative:./gen -I proto chat.proto
+protoc --go_out=plugins=grpc:./gen --go_opt=paths=source_relative -I chat_service.proto
 ```

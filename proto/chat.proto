@@ -1,0 +1,7 @@
+syntax = "proto3";
+package chat;
+option go_package="github.com/juandemanjon/go_service/gen;gen";
+
+message Message {
+  string body = 1;
+}

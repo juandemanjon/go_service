@@ -1,0 +1,9 @@
+syntax = "proto3";
+package chat;
+option go_package="github.com/juandemanjon/go_service/gen;gen";
+
+import "chat.proto";
+
+service ChatService {
+  rpc SayHello(Message) returns (Message) {}
+}
