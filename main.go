@@ -6,7 +6,7 @@ import (
 
 	"google.golang.org/grpc"
 
-  proto "github.com/juandemanjon/go_service/gen"
+  "github.com/juandemanjon/go_service/gen"
 )
 
 func main() {
@@ -15,8 +15,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
-
-  s := proto.Server{}
 
 	grpcServer := grpc.NewServer()
 
